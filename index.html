@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mahek Shah</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root { --accent: #6366f1; --accent2: #818cf8; --bg: #0f0f14; --card: rgba(255,255,255,0.04); --border: rgba(255,255,255,0.08); --text: #e2e8f0; --muted: #94a3b8; --heading: #f8fafc; }
+body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+a { color: var(--accent2); text-decoration: none; transition: color 0.2s; }
+a:hover { color: #a5b4fc; }
+::selection { background: var(--accent); color: #fff; }
+
+/* Animated gradient background */
+.bg-glow { position: fixed; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle at 30% 40%, rgba(99,102,241,0.08) 0%, transparent 50%), radial-gradient(circle at 70% 60%, rgba(139,92,246,0.06) 0%, transparent 50%); z-index: -1; animation: drift 20s ease-in-out infinite alternate; }
+@keyframes drift { to { transform: translate(5%, 3%) rotate(2deg); } }
+
+/* Hero */
+.hero { padding: 120px 20px 80px; text-align: center; position: relative; }
+.hero::after { content: ''; position: absolute; bottom: 0; left: 10%; right: 10%; height: 1px; background: linear-gradient(90deg, transparent, var(--border), transparent); }
+.hero h1 { font-size: 3.5rem; font-weight: 700; color: var(--heading); letter-spacing: -0.03em; margin-bottom: 12px; }
+.hero h1 span { background: linear-gradient(135deg, var(--accent), #a78bfa, #818cf8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.hero .tagline { font-size: 1.2rem; color: var(--muted); max-width: 550px; margin: 0 auto 28px; }
+.hero-links { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+.hero-links a { display: inline-flex; align-items: center; gap: 6px; padding: 10px 20px; border-radius: 10px; font-size: 0.9rem; font-weight: 500; border: 1px solid var(--border); background: var(--card); backdrop-filter: blur(10px); transition: all 0.25s; }
+.hero-links a:hover { border-color: var(--accent); background: rgba(99,102,241,0.1); color: #fff; transform: translateY(-2px); }
+
+/* Nav */
+nav { background: rgba(15,15,20,0.8); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 10; }
+nav ul { display: flex; justify-content: center; gap: 8px; padding: 12px 16px; list-style: none; flex-wrap: wrap; }
+nav a { color: var(--muted); font-weight: 500; font-size: 0.88rem; padding: 6px 14px; border-radius: 8px; transition: all 0.2s; }
+nav a:hover { color: var(--heading); background: var(--card); }
+
+/* Layout */
+.container { max-width: 740px; margin: 0 auto; padding: 0 20px; }
+section { padding: 70px 0; }
+section h2 { font-size: 1.4rem; font-weight: 600; color: var(--heading); margin-bottom: 32px; display: flex; align-items: center; gap: 12px; }
+section h2::before { content: ''; width: 4px; height: 24px; background: linear-gradient(180deg, var(--accent), var(--accent2)); border-radius: 2px; }
+
+/* Cards */
+.card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 24px; margin-bottom: 16px; transition: all 0.3s; }
+.card:hover { border-color: rgba(99,102,241,0.3); background: rgba(255,255,255,0.06); transform: translateY(-2px); }
+
+/* About */
+.about-text { font-size: 1.05rem; color: var(--muted); line-height: 1.8; }
+
+/* Experience */
+.entry-header { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+.entry-header h3 { font-size: 1.05rem; font-weight: 600; color: var(--heading); }
+.entry-header .org { color: var(--accent2); }
+.entry-header .date { color: var(--muted); font-size: 0.85rem; font-weight: 500; background: var(--card); padding: 3px 10px; border-radius: 6px; border: 1px solid var(--border); white-space: nowrap; }
+.card ul { padding-left: 18px; color: var(--muted); }
+.card li { margin-bottom: 6px; font-size: 0.95rem; }
+.card li::marker { color: var(--accent); }
+
+/* Skills */
+.skills-category { margin-bottom: 24px; }
+.skills-category h3 { font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 12px; }
+.skills-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.skill { padding: 7px 16px; border-radius: 8px; font-size: 0.85rem; font-weight: 500; border: 1px solid var(--border); background: var(--card); color: var(--text); transition: all 0.2s; }
+.skill:hover { border-color: var(--accent); color: var(--accent2); transform: translateY(-1px); }
+.skill.cert { border-color: rgba(251,191,36,0.3); color: #fbbf24; background: rgba(251,191,36,0.06); }
+.skill.cert:hover { border-color: #fbbf24; background: rgba(251,191,36,0.12); }
+
+/* Contact */
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.contact-item { display: flex; flex-direction: column; gap: 4px; padding: 20px; background: var(--card); border: 1px solid var(--border); border-radius: 12px; transition: all 0.25s; }
+.contact-item:hover { border-color: var(--accent); transform: translateY(-2px); }
+.contact-item span { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); }
+.contact-item a, .contact-item p { font-size: 1rem; color: var(--heading); font-weight: 500; }
+
+/* Footer */
+footer { text-align: center; padding: 40px 20px; color: var(--muted); font-size: 0.8rem; border-top: 1px solid var(--border); }
+
+/* Fade-in animation */
+.fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s, transform 0.6s; }
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 600px) {
+  .hero h1 { font-size: 2.4rem; }
+  .hero { padding: 80px 20px 60px; }
+  .entry-header { flex-direction: column; }
+  .contact-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="bg-glow"></div>
+
+<div class="hero">
+  <h1>Mahek <span>Shah</span></h1>
+  <p class="tagline">Cloud &amp; Data Engineering · AWS Database Specialist</p>
+  <div class="hero-links">
+    <a href="mailto:mahekshah963@gmail.com">✉ Email</a>
+    <a href="https://www.linkedin.com/in/mahekshah3">⟶ LinkedIn</a>
+  </div>
+</div>
+
+<nav>
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#leadership">Leadership</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="container">
+
+  <section id="about">
+    <h2>About</h2>
+    <div class="card fade-in">
+      <p class="about-text">
+        Cloud and Data Engineering professional with 2+ years of IT experience, specializing in AWS RDS database management and security. Skilled in optimizing and securing cloud-based data infrastructures, with hands-on experience managing RDS instances—including Aurora MySQL—and implementing high availability, disaster recovery, and performance tuning strategies to support data-driven operations.
+      </p>
+    </div>
+  </section>
+
+  <section id="experience">
+    <h2>Experience</h2>
+
+    <div class="card fade-in">
+      <div class="entry-header">
+        <h3>Cloud Support Engineer I · <span class="org">Amazon Web Services</span></h3>
+        <span class="date">Sept 2024 – Present</span>
+      </div>
+      <ul>
+        <li>Resolved complex technical issues across products and services, collaborating with development teams on high-impact escalations and partner integrations.</li>
+        <li>Designed and delivered technical training programs, reducing onboarding time for support engineers by 40%.</li>
+        <li>Coached and mentored incoming team members, enhancing service quality and knowledge retention.</li>
+        <li>Led technical interviews, contributing to a 30% increase in team quality and retention.</li>
+        <li>Pursuing SME in Amazon RDS Aurora MySQL — performance tuning, failover handling, and backup strategies.</li>
+        <li>Authored internal knowledge articles, reducing case resolution time and knowledge gaps.</li>
+      </ul>
+    </div>
+
+    <div class="card fade-in">
+      <div class="entry-header">
+        <h3>Cloud Support Associate · <span class="org">Amazon Web Services</span></h3>
+        <span class="date">Feb 2024 – Aug 2024</span>
+      </div>
+      <ul>
+        <li>Resolved customer issues across multiple channels for Amazon RDS (Aurora, MySQL, MariaDB, SQL Server) and DMS, maintaining high satisfaction ratings.</li>
+        <li>Provided hands-on support for AWS core services including S3, EC2, IAM, and VPC networking.</li>
+        <li>Collaborated cross-functionally to troubleshoot database issues, reducing average resolution time.</li>
+        <li>Conducted root cause analysis for recurring issues, achieving a 15% reduction in repeat case volume.</li>
+      </ul>
+    </div>
+
+    <div class="card fade-in">
+      <div class="entry-header">
+        <h3>Data Science Fellow · <span class="org">America on Tech</span></h3>
+        <span class="date">Oct 2023 – Dec 2023</span>
+      </div>
+      <ul>
+        <li>Executed data curation using Z-score and IQR methods, reducing data noise by over 15%.</li>
+        <li>Performed data exploration and visualization using R, Python, Tableau, and Power BI.</li>
+        <li>Applied feature engineering techniques including dummy coding and variable transformation.</li>
+        <li>Led development of a Random Forest ML model predicting student mental health behavior — 82% accuracy.</li>
+      </ul>
+    </div>
+
+    <div class="card fade-in">
+      <div class="entry-header">
+        <h3>Systems Analyst · <span class="org">Precipart</span></h3>
+        <span class="date">Jan 2020 – June 2020</span>
+      </div>
+      <ul>
+        <li>Automated CI/CD workflows using Jenkins and Docker, reducing deployment time by 40%.</li>
+        <li>Developed a sentiment analysis pipeline using Naive Bayes — 92% accuracy.</li>
+        <li>Maintained Active Directory infrastructure in compliance with PCI-DSS and SOC 2 standards.</li>
+        <li>Managed company-wide network infrastructure and incident resolution via WebHelpDesk.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="education">
+    <h2>Education</h2>
+    <div class="card fade-in">
+      <div class="entry-header">
+        <h3>BBA in Computer Information Systems · <span class="org">Macaulay Honors College at Baruch/CUNY</span></h3>
+        <span class="date">Aug 2020 – Dec 2023</span>
+      </div>
+      <ul>
+        <li>GPA: 3.78 / 4.0</li>
+        <li>Macaulay Honors distinction · Merit-Based Full Tuition Scholarship · Dean's List</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="skills">
+    <h2>Skills</h2>
+    <div class="card fade-in">
+      <div class="skills-category">
+        <h3>Certifications</h3>
+        <div class="skills-grid">
+          <span class="skill cert">AWS Solutions Architect – Associate</span>
+          <span class="skill cert">AWS Cloud Practitioner</span>
+          <span class="skill cert">AWS AI Practitioner</span>
+          <span class="skill cert">CompTIA IT Fundamentals</span>
+          <span class="skill cert">Bloomberg Market Concepts</span>
+        </div>
+      </div>
+      <div class="skills-category">
+        <h3>Languages &amp; Frameworks</h3>
+        <div class="skills-grid">
+          <span class="skill">Python</span>
+          <span class="skill">SQL</span>
+          <span class="skill">R</span>
+          <span class="skill">Linux</span>
+          <span class="skill">HTML/CSS</span>
+          <span class="skill">NumPy</span>
+          <span class="skill">Pandas</span>
+          <span class="skill">Scikit-learn</span>
+          <span class="skill">PyTorch</span>
+          <span class="skill">Matplotlib</span>
+          <span class="skill">Seaborn</span>
+          <span class="skill">Bootstrap</span>
+        </div>
+      </div>
+      <div class="skills-category">
+        <h3>Cloud &amp; Tools</h3>
+        <div class="skills-grid">
+          <span class="skill">AWS RDS / Aurora</span>
+          <span class="skill">DMS</span>
+          <span class="skill">EC2</span>
+          <span class="skill">S3</span>
+          <span class="skill">VPC</span>
+          <span class="skill">IAM</span>
+          <span class="skill">Lambda</span>
+          <span class="skill">CloudWatch</span>
+          <span class="skill">CloudTrail</span>
+          <span class="skill">Data Firehose</span>
+          <span class="skill">Power BI</span>
+          <span class="skill">Tableau</span>
+          <span class="skill">MySQL Workbench</span>
+          <span class="skill">Jupyter Notebook</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="leadership">
+    <h2>Leadership</h2>
+    <div class="card fade-in">
+      <div class="entry-header">
+        <h3>Vice President · <span class="org">Indian Student Association</span></h3>
+        <span class="date">Aug 2022 – Dec 2023</span>
+      </div>
+      <ul>
+        <li>Spearheaded strategic planning and execution of cultural and educational events.</li>
+        <li>Managed a team overseeing budget allocation and coordination of activities promoting Indian culture on campus.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>Contact</h2>
+    <div class="contact-grid fade-in">
+      <a class="contact-item" href="mailto:mahekshah963@gmail.com">
+        <span>Email</span>
+        <p>mahekshah963@gmail.com</p>
+      </a>
+      <a class="contact-item" href="https://www.linkedin.com/in/mahekshah3">
+        <span>LinkedIn</span>
+        <p>linkedin.com/in/mahekshah3</p>
+      </a>
+    </div>
+  </section>
+
+</div>
+
+<footer>© 2026 Mahek Shah</footer>
+
+<script>
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+</script>
+
+</body>
+</html>
