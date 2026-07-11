@@ -78,7 +78,7 @@ section h2{font-size:2rem;font-weight:700;color:var(--heading);letter-spacing:-0
 .timeline{position:relative;padding-left:32px}
 .timeline::before{content:'';position:absolute;left:7px;top:8px;bottom:8px;width:1px;background:linear-gradient(180deg,var(--accent),var(--border))}
 .t-item{position:relative;margin-bottom:24px}
-.t-item::before{content:'';position:absolute;left:-29px;top:8px;width:11px;height:11px;border-radius:50%;border:2px solid var(--accent);background:var(--bg);z-index:1;transition:all .3s}
+.t-item::before{content:'';position:absolute;left:-29px;top:32px;width:11px;height:11px;border-radius:50%;border:2px solid var(--accent);background:var(--bg);z-index:1;transition:all .3s}
 .t-item:hover::before{background:var(--accent);box-shadow:0 0 12px rgba(139,92,246,0.5)}
 .t-card{padding:24px;border-radius:16px;border:1px solid var(--border);background:var(--card);transition:all .3s}
 .t-card:hover{border-color:var(--border-hover);background:var(--card-hover);transform:translateX(4px)}
@@ -89,6 +89,8 @@ section h2{font-size:2rem;font-weight:700;color:var(--heading);letter-spacing:-0
 .t-card ul{padding-left:16px;color:var(--muted);font-size:.9rem}
 .t-card li{margin-bottom:4px}
 .t-card li::marker{color:var(--accent)}
+.t-card .card-link{display:inline-flex;align-items:center;gap:6px;margin-top:8px;font-size:.8rem;color:var(--accent2);font-weight:500;transition:color .2s}
+.t-card .card-link:hover{color:var(--accent3)}
 
 /* Skills */
 .skills-tabs{display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap}
@@ -111,6 +113,64 @@ section h2{font-size:2rem;font-weight:700;color:var(--heading);letter-spacing:-0
 /* Footer */
 footer{text-align:center;padding:40px 24px;color:var(--muted);font-size:.8rem;border-top:1px solid var(--border);font-family:'JetBrains Mono',monospace}
 
+/* Cursor spotlight */
+.cursor-glow{position:fixed;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(139,92,246,0.06) 0%,transparent 70%);pointer-events:none;z-index:0;transform:translate(-50%,-50%);transition:opacity .3s}
+
+/* Animated gradient borders */
+.glow-border{position:relative;overflow:hidden}
+.glow-border::before{content:'';position:absolute;inset:-1px;border-radius:inherit;padding:1px;background:conic-gradient(from var(--angle,0deg),transparent 60%,var(--accent) 80%,transparent 100%);-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:0;transition:opacity .4s;animation:rotate-border 4s linear infinite}
+.glow-border:hover::before{opacity:1}
+@property --angle{syntax:'<angle>';initial-value:0deg;inherits:false}
+@keyframes rotate-border{to{--angle:360deg}}
+
+/* Smooth number counter */
+.counter{display:inline-block;font-variant-numeric:tabular-nums}
+
+/* Typing effect */
+.typed-wrap{display:inline-block;min-width:200px;text-align:left}
+.typed-cursor{display:inline-block;width:2px;height:1.1em;background:var(--accent);margin-left:2px;animation:blink .8s step-end infinite;vertical-align:text-bottom}
+@keyframes blink{50%{opacity:0}}
+
+/* Nav active indicator */
+nav a.active{color:var(--heading);background:rgba(255,255,255,0.05)}
+nav a{position:relative}
+nav a::after{content:'';position:absolute;bottom:2px;left:50%;width:0;height:2px;background:var(--accent);border-radius:1px;transition:all .3s;transform:translateX(-50%)}
+nav a.active::after{width:60%}
+
+/* Enhanced card hover with subtle glow */
+.t-card{position:relative}
+.t-card::after{content:'';position:absolute;inset:0;border-radius:16px;opacity:0;transition:opacity .4s;background:radial-gradient(400px circle at var(--mouse-x,50%) var(--mouse-y,50%),rgba(139,92,246,0.06),transparent 40%)}
+.t-card:hover::after{opacity:1}
+
+/* Scroll progress on timeline */
+.timeline-progress{position:absolute;left:7px;top:8px;width:1px;background:var(--accent);transform-origin:top;transition:height .1s linear;z-index:0}
+
+/* About card glow on hover */
+.about-card{position:relative;overflow:hidden}
+.about-card::after{content:'';position:absolute;inset:0;border-radius:16px;opacity:0;transition:opacity .4s;background:radial-gradient(300px circle at var(--mouse-x,50%) var(--mouse-y,50%),rgba(139,92,246,0.08),transparent 40%)}
+.about-card:hover::after{opacity:1}
+
+/* Skill tag float animation */
+.skill-tag{animation:none}
+.skill-group.active .skill-tag{animation:fadeUp .4s ease both}
+.skill-group.active .skill-tag:nth-child(1){animation-delay:0s}
+.skill-group.active .skill-tag:nth-child(2){animation-delay:.04s}
+.skill-group.active .skill-tag:nth-child(3){animation-delay:.08s}
+.skill-group.active .skill-tag:nth-child(4){animation-delay:.12s}
+.skill-group.active .skill-tag:nth-child(5){animation-delay:.16s}
+.skill-group.active .skill-tag:nth-child(6){animation-delay:.2s}
+.skill-group.active .skill-tag:nth-child(7){animation-delay:.24s}
+.skill-group.active .skill-tag:nth-child(8){animation-delay:.28s}
+.skill-group.active .skill-tag:nth-child(9){animation-delay:.32s}
+.skill-group.active .skill-tag:nth-child(10){animation-delay:.36s}
+.skill-group.active .skill-tag:nth-child(11){animation-delay:.4s}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+/* Button magnetic effect */
+.btn{position:relative;overflow:hidden}
+.btn::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at var(--btn-x,50%) var(--btn-y,50%),rgba(255,255,255,0.1),transparent 60%);opacity:0;transition:opacity .3s}
+.btn:hover::before{opacity:1}
+
 /* Animations */
 .reveal{opacity:0;transform:translateY(30px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}
 .reveal.visible{opacity:1;transform:translateY(0)}
@@ -118,12 +178,16 @@ footer{text-align:center;padding:40px 24px;color:var(--muted);font-size:.8rem;bo
 .reveal-delay-2{transition-delay:.2s}
 .reveal-delay-3{transition-delay:.3s}
 
+/* Smooth section transitions */
+section{transition:opacity .5s}
+
 @media(max-width:640px){
   .hero h1{font-size:2.2rem}
   .about-grid{grid-template-columns:1fr}
   .contact-grid{grid-template-columns:1fr}
   nav ul{display:none}
   .t-card .top{flex-direction:column}
+  .cursor-glow{display:none}
 }
 </style>
 </head>
@@ -133,6 +197,7 @@ footer{text-align:center;padding:40px 24px;color:var(--muted);font-size:.8rem;bo
 <div class="orb orb-1"></div>
 <div class="orb orb-2"></div>
 <div class="orb orb-3"></div>
+<div class="cursor-glow" id="cursorGlow"></div>
 
 <div class="wrapper">
 
@@ -153,7 +218,7 @@ footer{text-align:center;padding:40px 24px;color:var(--muted);font-size:.8rem;bo
 <section class="hero">
   <div class="hero-badge"><span class="dot"></span> Available for opportunities</div>
   <h1>Hi, I'm <span class="gradient">Mahek Shah</span></h1>
-  <p class="sub">Solutions Architect at AWS · 5x AWS Certified · Aurora MySQL &amp; RDS MySQL SME · Based in New York, NY</p>
+  <p class="sub"><span class="typed-wrap" id="typed"></span><span class="typed-cursor"></span></p>
   <div class="hero-btns">
     <a href="mailto:mahekshah963@gmail.com" class="btn btn-primary">✉ Get in Touch</a>
     <a href="https://www.linkedin.com/in/mahekshah3" class="btn btn-ghost">⟶ LinkedIn</a>
@@ -167,18 +232,18 @@ footer{text-align:center;padding:40px 24px;color:var(--muted);font-size:.8rem;bo
   <div class="section-label reveal">// about</div>
   <h2 class="reveal">A bit about me</h2>
   <div class="about-grid">
-    <div class="about-card wide reveal">
+    <div class="about-card wide reveal glow-border">
       <h3>Summary</h3>
       <p>Cloud and Data Engineering professional with 3+ years of IT experience, specializing in AWS RDS database management and security. Experienced in managing RDS instances including Aurora MySQL, implementing high availability, disaster recovery, and performance tuning strategies to support scalable, data-driven enterprise operations.</p>
     </div>
-    <div class="about-card reveal reveal-delay-1">
+    <div class="about-card reveal reveal-delay-1 glow-border">
       <h3>Experience</h3>
-      <div class="big">3<span>+</span> years</div>
+      <div class="big"><span class="counter" data-target="3">0</span><span>+</span> years</div>
       <p>in Cloud &amp; IT</p>
     </div>
-    <div class="about-card reveal reveal-delay-2">
+    <div class="about-card reveal reveal-delay-2 glow-border">
       <h3>Certifications</h3>
-      <div class="big">5<span>x</span></div>
+      <div class="big"><span class="counter" data-target="5">0</span><span>x</span></div>
       <p>AWS Certified</p>
     </div>
   </div>
@@ -187,7 +252,8 @@ footer{text-align:center;padding:40px 24px;color:var(--muted);font-size:.8rem;bo
 <section id="experience">
   <div class="section-label reveal">// experience</div>
   <h2 class="reveal">Where I've worked</h2>
-  <div class="timeline">
+  <div class="timeline" id="expTimeline">
+    <div class="timeline-progress" id="timelineProgress"></div>
 
     <div class="t-item reveal">
       <div class="t-card">
@@ -293,34 +359,37 @@ footer{text-align:center;padding:40px 24px;color:var(--muted);font-size:.8rem;bo
     <div class="t-item reveal">
       <div class="t-card">
         <div class="top">
-          <h3>AWS Database Blog</h3>
+          <h3><a href="https://aws.amazon.com/blogs/database/automate-the-export-of-amazon-rds-for-mysql-or-amazon-aurora-mysql-audit-logs-to-amazon-s3-with-batching-or-near-real-time-processing/" target="_blank">AWS Database Blog</a></h3>
         </div>
         <ul>
           <li>Co-authored a published AWS blog on automating export of RDS/Aurora MySQL audit logs to S3 with batching and near-real-time processing</li>
         </ul>
+        <a class="card-link" href="https://aws.amazon.com/blogs/database/automate-the-export-of-amazon-rds-for-mysql-or-amazon-aurora-mysql-audit-logs-to-amazon-s3-with-batching-or-near-real-time-processing/" target="_blank">Read Blog ↗</a>
       </div>
     </div>
 
     <div class="t-item reveal">
       <div class="t-card">
         <div class="top">
-          <h3>Aurora MySQL Serverless CRUD App</h3>
+          <h3><a href="https://d1jsnjpvfx9lxw.cloudfront.net" target="_blank">Aurora MySQL Serverless CRUD App</a></h3>
         </div>
         <ul>
           <li>Deployed a serverless CRUD app using Aurora Serverless v2, Lambda, API Gateway, CloudFront, Cognito, and Terraform IaC</li>
         </ul>
+        <a class="card-link" href="https://d1jsnjpvfx9lxw.cloudfront.net" target="_blank">Live Demo ↗</a>
       </div>
     </div>
 
     <div class="t-item reveal">
       <div class="t-card">
         <div class="top">
-          <h3>QueryMind – AI Database Assistant</h3>
+          <h3><a href="https://di3z37xarbe5o.cloudfront.net" target="_blank">QueryMind – AI Database Assistant</a></h3>
         </div>
         <ul>
           <li>Built a natural-language-to-SQL tool using Amazon Bedrock (Claude 3 Sonnet), Lambda, API Gateway WebSocket, and CloudFront with Terraform IaC</li>
           <li>Supports MySQL, Aurora MySQL, MariaDB, PostgreSQL, and Aurora PostgreSQL with EXPLAIN plan analysis, query optimization, and slow query detection</li>
         </ul>
+        <a class="card-link" href="https://di3z37xarbe5o.cloudfront.net" target="_blank">Live Demo ↗</a>
       </div>
     </div>
 
@@ -447,12 +516,100 @@ function drawParticles(){
 }
 drawParticles();
 
-// Nav scroll
-window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('scrolled',scrollY>50));
+// Cursor glow
+const glow=document.getElementById('cursorGlow');
+document.addEventListener('mousemove',e=>{
+  glow.style.left=e.clientX+'px';
+  glow.style.top=e.clientY+'px';
+});
+
+// Card mouse tracking for radial glow
+document.querySelectorAll('.t-card,.about-card').forEach(card=>{
+  card.addEventListener('mousemove',e=>{
+    const r=card.getBoundingClientRect();
+    card.style.setProperty('--mouse-x',(e.clientX-r.left)+'px');
+    card.style.setProperty('--mouse-y',(e.clientY-r.top)+'px');
+  });
+});
+
+// Button magnetic + radial effect
+document.querySelectorAll('.btn').forEach(btn=>{
+  btn.addEventListener('mousemove',e=>{
+    const r=btn.getBoundingClientRect();
+    const x=e.clientX-r.left,y=e.clientY-r.top;
+    btn.style.setProperty('--btn-x',x+'px');
+    btn.style.setProperty('--btn-y',y+'px');
+    btn.style.transform=`translateY(-2px) translate(${(x-r.width/2)*0.1}px,${(y-r.height/2)*0.1}px)`;
+  });
+  btn.addEventListener('mouseleave',()=>{btn.style.transform=''});
+});
+
+// Nav scroll + active section
+const sections=document.querySelectorAll('section[id]');
+const navLinks=document.querySelectorAll('nav a');
+window.addEventListener('scroll',()=>{
+  document.getElementById('nav').classList.toggle('scrolled',scrollY>50);
+  let current='';
+  sections.forEach(s=>{if(scrollY>=s.offsetTop-200)current=s.getAttribute('id')});
+  navLinks.forEach(a=>{a.classList.toggle('active',a.getAttribute('href')==='#'+current)});
+});
 
 // Reveal on scroll
 const obs=new IntersectionObserver(e=>e.forEach(el=>{if(el.isIntersecting)el.target.classList.add('visible')}),{threshold:.1});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+// Counter animation
+const counterObs=new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      const el=entry.target;
+      const target=+el.dataset.target;
+      let current=0;
+      const step=()=>{
+        current+=1;
+        el.textContent=current;
+        if(current<target)requestAnimationFrame(step);
+      };
+      step();
+      counterObs.unobserve(el);
+    }
+  });
+},{threshold:.5});
+document.querySelectorAll('.counter').forEach(el=>counterObs.observe(el));
+
+// Typing effect
+const typed=document.getElementById('typed');
+const phrases=['Solutions Architect at AWS','5x AWS Certified','Aurora MySQL & RDS MySQL SME','Based in New York, NY'];
+let phraseIdx=0,charIdx=0,deleting=false;
+function typeLoop(){
+  const phrase=phrases[phraseIdx];
+  if(!deleting){
+    typed.textContent=phrase.substring(0,charIdx+1);
+    charIdx++;
+    if(charIdx===phrase.length){setTimeout(()=>{deleting=true;typeLoop()},2000);return}
+    setTimeout(typeLoop,50);
+  }else{
+    typed.textContent=phrase.substring(0,charIdx-1);
+    charIdx--;
+    if(charIdx===0){deleting=false;phraseIdx=(phraseIdx+1)%phrases.length;setTimeout(typeLoop,400);return}
+    setTimeout(typeLoop,30);
+  }
+}
+typeLoop();
+
+// Timeline scroll progress
+const timeline=document.getElementById('expTimeline');
+const progress=document.getElementById('timelineProgress');
+if(timeline&&progress){
+  window.addEventListener('scroll',()=>{
+    const rect=timeline.getBoundingClientRect();
+    const windowH=window.innerHeight;
+    const start=rect.top+window.scrollY-windowH;
+    const end=rect.bottom+window.scrollY-windowH*0.5;
+    const scrolled=Math.min(Math.max((window.scrollY-start)/(end-start),0),1);
+    progress.style.height=(scrolled*100)+'%';
+  });
+}
 
 // Skill tabs
 document.querySelectorAll('.skills-tabs button').forEach(btn=>{
